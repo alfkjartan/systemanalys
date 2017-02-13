@@ -1,1 +1,6 @@
 *.ipynb_checkpoints*
+*~
+*.aux
+*.log
+*.out
+*cache__*

@@ -1,0 +1,1089 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+
+    \title{Introduction to Python}
+    \author{Kjartan Halvorsen}
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Short introduction to
+python}\label{short-introduction-to-python}
+
+\subsection{Preliminary}\label{preliminary}
+
+This notebook is part of the repository
+\href{https://github.com/alfkjartan/systemanalys}{systemanalys}. You can
+either clone this repository using \href{https://help.github.com/articles/set-up-git/}{\texttt{git}}, or you can download it
+as a
+\href{https://github.com/alfkjartan/systemanalys/archive/master.zip}{zip-file}.
+
+\subsection{Installation}\label{installation}
+
+\subsubsection{Anaconda}\label{anaconda}
+
+In this course we recomment to use the
+\href{https://www.continuum.io/downloads}{Anaconda} python distribution.
+Make sure to download the Python3 version. The Anaconda distribution
+contains by default many of the most common python modules for
+scientific computing. However, it does not come with
+\href{https://simpy.readthedocs.io/en/latest/}{SimPy}. To install this,
+open the Anaconda prompt (Start -\textgreater{} All Programs
+-\textgreater{} Anaconda -\textgreater{} Anaconda prompt) and write
+
+\begin{quote}
+\texttt{\textgreater{}\ pip\ install\ simpy}
+\end{quote}
+
+You can manage your Anaconda installation and launch programs from the
+Anaconda Navigator (Start -\textgreater{} All Programs -\textgreater{}
+Anaconda -\textgreater{} Anaconda Navigator). The anaconda distribution
+does come with Jupyter, which is a program that lets you work with
+notebooks (code and documentation interwoven) in your favourite browser.
+Wonderful to work with!
+
+\subsubsection{Jupyter}\label{jupyter}
+
+Writing and running the simulation will be done using
+\href{https://jupyter.readthedocs.io/en/latest/index.html}{Jupyter}
+notebooks. This getting-started-guide is written as a Jupyter notebook.
+You may be reading this and running the command in jupyter. Or if you
+are reading the pdf-version you are encouraged to jump over to the
+Jupyter version right away. You can launch Jupyter notebook from the
+Anaconda Navigator. This will open a new tab in your default web
+browser. It shows the current working directory from which you can
+create folders, files or notebooks. Navigate to the folder containing
+this notebook (\texttt{systemanalys/doc}) and open the notebook
+Introduction to Python.
+
+    \subsection{Python variables and
+datatypes}\label{python-variables-and-datatypes}
+
+To do something useful, we need to define \emph{variables} to hold
+\emph{data}. In python the \emph{type} of the variable is not specified,
+so a variable name can hold any kind of data. This is called ``weak
+typing''. The most common basic data types are
+
+    numbers
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{42}
+\end{Verbatim}
+
+    strings
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{s1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{system}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{s2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{system}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    lists
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{b} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hej}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s1}\PY{p}{,} \PY{n}{a}\PY{p}{]}
+\end{Verbatim}
+
+    In the assignments above, this is what happens in the computer: Memory
+space is allocated to hold the data (what is on the right hand side of
+the equal sign), and a variable name is created to reference that data.
+Also, the variable name is added to the list of current variables. When
+one variable is assigned to another, the data is not copied (unless it
+is a simple data type such as a float or integer). Instead we end up
+with two variables referencing the same piece of data. For instance
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{c} \PY{o}{=} \PY{n}{b}
+         \PY{n}{c}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} ['hej', 'system', 42]
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{c}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{24}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['hej', 'system', 24]
+['hej', 'system', 24]
+    \end{Verbatim}
+
+    Note the command \texttt{c{[}-1{]}\ =\ 24}. Negative indices in python
+is a convenient way of accessing elements starting from the end of the
+list. Note also that the command is (re)assigning the last element of
+\texttt{c} to the value 24, leaving the other elements unchanged. The
+data referenced by \texttt{c} is modified, and the variable \texttt{b}
+which refers to the same data will now show the same change. This is
+fundamentally different from writing
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{c} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{b}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} ['hej', 'system', 24]
+\end{Verbatim}
+        
+    Above, an empty list is created and the variable \texttt{c} is then
+assigned to this empty list instead of whatever it was assigned to
+earlier. The two variables \texttt{c} and \texttt{b} no longer reference
+the same data, and the operation leaves \texttt{b} entirely unchanged.
+
+    \subsection{If, for and while}\label{if-for-and-while}
+
+The \texttt{if} construct is used whenever certain lines of code should
+be executed only when some condition holds. For instance
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{==} \PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c is empty}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+c is empty
+    \end{Verbatim}
+
+    The block of code (lines of code) to be executed if the \texttt{if}
+statement is true is identified by being further \emph{indented} than
+the line starting with \texttt{if}. There are no curly brackets or
+keywords marking the start and end of the block. The first line that are
+equally or less indented than the \texttt{if} line ends the block of
+code to be executed. In the example above, this line is empty.
+
+To repeat some piece of code a known number of times, use a \texttt{for}
+loop:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hej
+system
+24
+    \end{Verbatim}
+
+    The function \texttt{len()} returns the length of the list, and the
+function \texttt{range(n)} returns a list of integers starting at 0 and
+ending at \(n-1\). It may seem a bit unnecessary to create a list of
+integers to use as indices into \texttt{b}. Sometimes the index is
+actually needed, but more often we loop over the elements more
+conveniently
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{b}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hej
+system
+24
+    \end{Verbatim}
+
+    A \texttt{while} loop is useful to repeat a number of lines for as long
+as some condition is true
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{7}
+         \PY{k}{while} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{:}
+             \PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{7}
+         \PY{n}{x}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 1001
+\end{Verbatim}
+        
+    \texttt{while} can also be used to create an eternal loop
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+            \PY{n}{x} \PY{o}{*}\PY{o}{=} \PY{n}{x}
+        \PY{n}{x}
+\end{Verbatim}
+
+    To interrupt the neverending execution of the above code, look to the
+Jupyter menu near the top of the browser page and choose Kernel
+-\textgreater{} Interrupt
+
+    \subsection{Modules}\label{modules}
+
+So far we have entered the code directly into the command window. More
+commonly, one writes code in text files which are then read and executed
+by the interpreter. A python file (with ending \texttt{.py}) containing
+code is referred to as a \emph{module}. At start-up, some of these
+modules are loaded automatically and are available for use in our own
+code. Other modules must be explicitly imported before the code can be
+accessed. There is, for instance, a \texttt{math} module containing a
+number of mathematical functions, and `numpy' for numerical computations
+and linear algebra. To access functions from these modules we must do
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+    then we can use functions such as
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.2246467991473532e-16
+1.0
+    \end{Verbatim}
+
+    other modules of interest include
+\href{http://docs.scipy.org/doc/scipy/reference/}{SciPy} for scientific
+computing, \href{http://matplotlib.org/}{matplotlib} for plotting and
+\href{http://pandas.pydata.org/}{pandas} for data analysis. For
+simulations of discrete event simulations we will use the
+\href{https://simpy.readthedocs.io/en/latest/}{SimPy} module.
+
+    \subsection{Functions}\label{functions}
+
+Functions are fundamental constructs in programming languages. They make
+code much easier to understand and maintain by separating and
+encapsulating operations. Consider this simple function that swops the
+first and last element of a list:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{def} \PY{n+nf}{swop}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{p}{:}
+            \PY{n}{slask} \PY{o}{=} \PY{n}{alist}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{alist}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{alist}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{alist}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{slask}
+             \PY{c+c1}{\PYZsh{} Think about cases where the function will fail and try to figure out how to make it more robust}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+         \PY{n}{swop}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[24, 'system', 'hej']
+['hej', 'system', 24]
+    \end{Verbatim}
+
+    The function above did some operations on the input argument, but did
+not return any value. This is of course possible also:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{def} \PY{n+nf}{middle}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{p}{:}
+           \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Will return the element in the middle of the list. }
+         \PY{l+s+sd}{      If the length is even, it will return the last element before the middle. \PYZsq{}\PYZsq{}\PYZsq{}}
+           \PY{n}{ind} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} since indexing starts at 0}
+           \PY{k}{return} \PY{n}{alist}\PY{p}{[}\PY{n}{ind}\PY{p}{]}
+         
+         \PY{n}{middle}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 'hej'
+\end{Verbatim}
+        
+    \subsection{Creating your own
+datatypes}\label{creating-your-own-datatypes}
+
+Basically all modern programming languages allows you to create your own
+datatypes based on the fundamental types that the language provides.
+Assume that we would like to create a datatype \texttt{Customer}. We
+want to use it as this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{c1} \PY{o}{=} \PY{n}{Customer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pontus}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{prio}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{c2} \PY{o}{=} \PY{n}{Curstomer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elisa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{prio}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{n}{c1}\PY{p}{,} \PY{n}{c2}\PY{p}{]}
+\end{Verbatim}
+
+    Which gives us a short queue containing two customers. The answer is to
+define a \emph{class} \texttt{Customer} from which we can instantiate
+(generate) any number of \emph{objects}. The values \texttt{name} and
+\texttt{prio} are \emph{attributes} of the object:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{class} \PY{n+nc}{Customer}\PY{p}{:}
+           \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{n}{prio}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{name}
+              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prio} \PY{o}{=} \PY{n}{prio}
+         
+         \PY{n}{c1} \PY{o}{=} \PY{n}{Customer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pontus}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{prio}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{c2} \PY{o}{=} \PY{n}{Customer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elisa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{prio}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{n}{c1}\PY{p}{,} \PY{n}{c2}\PY{p}{]}
+         \PY{n}{queue}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} [<\_\_main\_\_.Customer at 0x7fb9345a1940>, <\_\_main\_\_.Customer at 0x7fb9345a15f8>]
+\end{Verbatim}
+        
+    The function \texttt{\_\_init()\_\_} is called the \emph{constructor}.
+It is called when a new object is created. The first argument,
+\texttt{self}, is a reference to the actual object under construction.
+We see from the code that the constructor takes two arguments: the name
+and the priority of the customer. The priority has a default value of 1,
+which is used if the customer object is created with one argument only.
+We may check the name and priority of the customers as
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{queue}\PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Customer }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ has priority }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{c}\PY{o}{.}\PY{n}{name}\PY{p}{,} \PY{n}{c}\PY{o}{.}\PY{n}{prio}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Customer Pontus has priority 1
+Customer Elisa has priority 3
+    \end{Verbatim}
+
+    The somewhat complicated syntax on the \texttt{print} line is actually a
+quite common way (many programming languages has it) of formatting
+output that contains numbers. Within the string, the
+percentage-expressions are placeholders for numbers or strings. The
+occurance of the placeholders are matched with the elements in the
+\emph{tuple} following the string (the tuple is the list within
+parantheses separated from the string by the percentage symbol). A tuple
+is a fundamental datatype in python. It is a list whose elements cannot
+be changed after it is constructed.
+
+One important advantage of objects and object-oriented programming is
+that functions written to work on the objects can be associated with the
+object itself. These functions are called \emph{methods} or \emph{member
+functions}. If we have an object, say a \texttt{list} object, we can
+print a list of the methods and attributes for that object with the help
+of the \texttt{dir} function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Evelyn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eirik}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{dir}\PY{p}{(}\PY{n}{names}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} ['\_\_add\_\_',
+          '\_\_class\_\_',
+          '\_\_contains\_\_',
+          '\_\_delattr\_\_',
+          '\_\_delitem\_\_',
+          '\_\_dir\_\_',
+          '\_\_doc\_\_',
+          '\_\_eq\_\_',
+          '\_\_format\_\_',
+          '\_\_ge\_\_',
+          '\_\_getattribute\_\_',
+          '\_\_getitem\_\_',
+          '\_\_gt\_\_',
+          '\_\_hash\_\_',
+          '\_\_iadd\_\_',
+          '\_\_imul\_\_',
+          '\_\_init\_\_',
+          '\_\_init\_subclass\_\_',
+          '\_\_iter\_\_',
+          '\_\_le\_\_',
+          '\_\_len\_\_',
+          '\_\_lt\_\_',
+          '\_\_mul\_\_',
+          '\_\_ne\_\_',
+          '\_\_new\_\_',
+          '\_\_reduce\_\_',
+          '\_\_reduce\_ex\_\_',
+          '\_\_repr\_\_',
+          '\_\_reversed\_\_',
+          '\_\_rmul\_\_',
+          '\_\_setattr\_\_',
+          '\_\_setitem\_\_',
+          '\_\_sizeof\_\_',
+          '\_\_str\_\_',
+          '\_\_subclasshook\_\_',
+          'append',
+          'clear',
+          'copy',
+          'count',
+          'extend',
+          'index',
+          'insert',
+          'pop',
+          'remove',
+          'reverse',
+          'sort']
+\end{Verbatim}
+        
+    You can use the \texttt{help()} function to get help on specific
+methods. For instance
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{help}\PY{p}{(}\PY{n}{names}\PY{o}{.}\PY{n}{sort}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Help on built-in function sort:
+
+sort({\ldots}) method of builtins.list instance
+    L.sort(key=None, reverse=False) -> None -- stable sort *IN PLACE*
+    \end{Verbatim}
+
+    This help string tells us that the \texttt{sort()} method will sort the
+list in place, i.e.~it will be modified by this method. It will try to
+sort the list depending on the types of the elements. So sorting a list
+of strings is
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Evelyn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elisa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eirik}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Emilio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{names}\PY{p}{)}
+         \PY{n}{names}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         \PY{n}{names}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Evelyn', 'Elisa', 'Eirik', 'Emilio']
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} ['Eirik', 'Elisa', 'Emilio', 'Evelyn']
+\end{Verbatim}
+        
+    \subsection{Generators}\label{generators}
+
+\emph{Generators} is a powerful concept in python. It is used to
+implement the processes in the pseudo-parallell / process-based
+simulations in SimPy. You should think of generators as functions which
+generateas and returns elements in a sequence. Let's look at a simple
+example which generates a sequence of odd numbers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{def} \PY{n+nf}{oddnumbers}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+           \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
+           \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+             \PY{k}{yield} \PY{n}{x}
+             \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{+}\PY{l+m+mi}{2}
+         
+         \PY{n}{og} \PY{o}{=} \PY{n}{oddnumbers}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} This creates the generator}
+         
+         \PY{n+nb}{print}\PY{p}{(} \PY{n+nb}{next}\PY{p}{(}\PY{n}{og}\PY{p}{)} \PY{p}{)} \PY{c+c1}{\PYZsh{} Prints 1}
+         \PY{n+nb}{print}\PY{p}{(} \PY{n+nb}{next}\PY{p}{(}\PY{n}{og}\PY{p}{)} \PY{p}{)} \PY{c+c1}{\PYZsh{} Prints 3}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} The odd numbers 5, 7, 9, 11}
+           \PY{n+nb}{print}\PY{p}{(} \PY{n+nb}{next}\PY{p}{(}\PY{n}{og}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+3
+5
+7
+9
+11
+    \end{Verbatim}
+
+    Python recognizes a definition of a generator by the existence of the
+keyword \texttt{yield}. In the example, a generator object is created
+\texttt{og\ =\ oddnumbers()}, and then the function \texttt{next(og)} is
+called on the generator object. The first call to \texttt{next()} causes
+the code in the definition of the generator to be executed from the top
+to the first occurance of \texttt{yield}. The statment \texttt{yield} is
+similar to a return statement in a regular function. However, in the
+next call to \texttt{next()}, the execution starts at the first line
+after the \texttt{yield} statement that caused the previous return to
+the caller. The execution goes on to the next occurance of
+\texttt{yield}. The local variables in the definition of the generator
+retains there values between calls to \texttt{next()}.
+
+If a call to \texttt{next()} should not reach a \texttt{yield}
+statement, but instead reach the end of the definition of the generator,
+then an exception is raised which tells the caller to stop iterating
+over the generator: There are no more elements in the sequence. The odd
+numbers are of course an infinite sequence, so it should be possible (in
+theory) to generate increasingly large odd numbers by calling
+\texttt{next(og)} forever.
+
+    \subsubsection{A classical example: the Fibonacci
+numbers}\label{a-classical-example-the-fibonacci-numbers}
+
+The Fibonacci number series is a sequence of integers defined by the
+difference equation \[ F(n) = F(n-1) + F(n-2) \] together with the
+starting conditions \(F(0) = 0\), \(F(1) = 1\). Leonardo Fibonacci used
+the difference equation as a simple model of the dynamics in a
+population of rabbits. In the model there are no deaths, so at each time
+step, the number of rabbits is equal to the number of rabbits in the
+previous time step plus the number of rabbits born since the last time
+step. Each rabbit has exactly one offspring in each time step, except
+for an initial newborn-period of one time step. Hence the number of
+rabbits in the last time step that are mature enough to reproduce equals
+the size of the population two time steps back in time.
+
+A standard schoolbook implementation of the fibonacci numbers would use
+recursion to compute the numbers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{def} \PY{n+nf}{fib\PYZus{}rec}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{n}\PY{o}{==}\PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{n}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{n}
+             \PY{k}{return} \PY{n}{fib\PYZus{}rec}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{n}{fib\PYZus{}rec}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{fib\PYZus{}rec}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} 13
+\end{Verbatim}
+        
+    The implementation looks kind of nice, but this type of recursive
+implementation is not a good idea in a modern high-level language such
+as python. The reason being that function calls are quite expensive as
+compared to C. Each call to \texttt{fib\_rec()} causes two new calls to
+the function. Also, values are computed twice.
+
+The sequence is much more efficiently implemented with a generator
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k}{def} \PY{n+nf}{fib}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Generates the sequence if fibonacci numbers \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{fmin1} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{fmin2} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{f} \PY{o}{=} \PY{n}{fmin1}\PY{o}{+}\PY{n}{fmin2}
+                 \PY{k}{yield} \PY{n}{f}
+                 \PY{c+c1}{\PYZsh{} Update}
+                 \PY{p}{(}\PY{n}{fmin2}\PY{p}{,} \PY{n}{fmin1}\PY{p}{)} \PY{o}{=} \PY{p}{(}\PY{n}{fmin1}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+         
+         \PY{n}{fg} \PY{o}{=} \PY{n}{fib}\PY{p}{(}\PY{p}{)}
+         \PY{p}{[}\PY{n+nb}{next}\PY{p}{(}\PY{n}{fg}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} [1, 1, 2, 3, 5, 8, 13]
+\end{Verbatim}
+        
+    The line \texttt{{[}next(fg)\ for\ i\ in\ range(7){]}} is an example of
+\emph{list comprehension}. A list is generated from the return values of
+the function call \texttt{next(fg)}. This is done 7 times.
+
+Timing the two implementations of the fibonacci numbers show clearly the
+difference in efficiency.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{n}{t} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fg} \PY{o}{=} \PY{n}{fib}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fibonacciSequence} \PY{o}{=} \PY{p}{[}\PY{n+nb}{next}\PY{p}{(}\PY{n}{fg}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{t}\PY{p}{)}
+         \PY{n}{t} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fib\PYZus{}rec}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{t}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.00012254714965820312
+0.4177854061126709
+    \end{Verbatim}
+
+    \subsection{Random number generation}\label{random-number-generation}
+
+Discrete event systems are almost always stochastic systems. To build a
+model and simulate it, we need sequences of random numbers. A truly
+random sequence of numbers is actually very difficult to generate.
+Instead, the computer will generate a completely deterministic sequence
+of numbers, but whose properties are close to that of a sequence of
+random numbers. The numbers are therefore called pseudo-random.
+
+Python, as well as most other programming languages used in scientific
+computing, has a built-in pseudo-number generator. We don't have to
+implement this ourselves. The pseudo-number generator is part of the
+\href{https://docs.python.org/2/library/random.html}{random} module. It
+is used as follows
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1315}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{gauss}\PY{p}{(}\PY{n}{mu}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]} \PY{p}{)}
+         \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1314}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{gauss}\PY{p}{(}\PY{n}{mu}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]} \PY{p}{)}
+         \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1315}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{gauss}\PY{p}{(}\PY{n}{mu}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.6201987142056988, 1.3120253897349055, 0.7844364422139856]
+[0.5896986001391438, 1.325007288757538, 1.2354502475094375]
+[0.6201987142056988, 1.3120253897349055, 0.7844364422139856]
+    \end{Verbatim}
+
+    Note that the sequence of the first three numbers are the same after the
+seed is set to the same number. If you choose not to set a seed, the
+default behaviour of python is to use the system time to set a seed that
+will be different every time you run your code. The purpose of setting
+the seed explicitly is to be able to reproduce simulation experiments.
+
+Use \texttt{dir(random)} to see the different methods available to
+generate random numbers from different distributions. Use
+\texttt{help()} to get helt on any specific method. For instance
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{help}\PY{p}{(}\PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Help on method expovariate in module random:
+
+expovariate(lambd) method of random.Random instance
+    Exponential distribution.
+    
+    lambd is 1.0 divided by the desired mean.  It should be
+    nonzero.  (The parameter would be called "lambda", but that is
+    a reserved word in Python.)  Returned values range from 0 to
+    positive infinity if lambd is positive, and from negative
+    infinity to 0 if lambd is negative.
+    \end{Verbatim}
+
+    \subsection{The SimPy module}\label{the-simpy-module}
+
+There are good introductory
+\href{http://simpy.readthedocs.io/en/latest/simpy_intro/index.html}{tutorials},
+\href{http://simpy.readthedocs.io/en/latest/examples/index.html}{examples}
+and
+\href{http://simpy.readthedocs.org/en/latest/api_reference/index.html}{documentation}
+for SimPy. In this section we just want to point out a key concept to
+understand when implementing simulation models in SimPy.
+
+The \emph{processes} of a discrete event system are implemented as
+\emph{generators} in python. The defining property of a generator is
+that it can return a value after a call (by use of the \texttt{yield}
+keyword), and continue execution where it left off at the next call.
+This is exactly what we need to implement processes that performs some
+operations and then wait for some event to happen before continuing.
+
+In SimPy, the \texttt{yield} statement in the process generators
+\textbf{must} return an event object. The process will continue when the
+event happens. Let's look at some simple examples.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+          \PY{k+kn}{import} \PY{n+nn}{simpy}
+\end{Verbatim}
+
+    \subsubsection{Example 1 - Reneging
+customers}\label{example-1---reneging-customers}
+
+Consider the process of a customer that enters a quee, waits for 1.3
+time units and then exits the queue. The process step of waiting is
+implemented by returning a \texttt{timeout} event object. The event will
+occur when the specified time has passed. We will assme that if the
+customer is still in queue when the time has passed, then she will get
+impatient and exit the system. Otherwise, we assume that the customer
+has already been served or is currently getting served.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{k}{def} \PY{n+nf}{reneging\PYZus{}customer\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{n}{patience}\PY{p}{,} \PY{n}{queue}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ with patience }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ enters the queue at time }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{patience}\PY{p}{,} \PY{n}{env}\PY{o}{.}\PY{n}{now}\PY{p}{)} \PY{p}{)}
+              \PY{n}{queue}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{name}\PY{p}{)} \PY{c+c1}{\PYZsh{} Customers are identified by name, so all names should be unique}
+              \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(}\PY{l+m+mf}{1.3}\PY{p}{)}
+              \PY{k}{if} \PY{n}{name} \PY{o+ow}{in} \PY{n}{queue}\PY{p}{:}
+                  \PY{n}{queue}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ got impatient and exited the queue at time }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{env}\PY{o}{.}\PY{n}{now}\PY{p}{)} \PY{p}{)}
+              
+          \PY{n}{env} \PY{o}{=} \PY{n}{simpy}\PY{o}{.}\PY{n}{Environment}\PY{p}{(}\PY{p}{)}
+          \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(}\PY{n}{reneging\PYZus{}customer\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Oscar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{1.3}\PY{p}{,} \PY{n}{queue}\PY{p}{)}\PY{p}{)}
+          \PY{n}{env}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Oscar with patience 1.300000 enters the queue at time 0.000000
+Oscar got impatient and exited the queue at time 1.300000
+    \end{Verbatim}
+
+    \paragraph{Customer generator}\label{customer-generator}
+
+We will need a process that generates customers that enters the system.
+Typically, the time between arrivals is random. Here we assume the time
+between arrivals to be exponentially distributed with mean time 1.0.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{k}{def} \PY{n+nf}{customer\PYZus{}generator\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{numberOfCustomers}\PY{p}{,} \PY{n}{timeBetween}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{newArrivalEvents}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Will generate a fixed number of customers, with random time between arrivals.\PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{while} \PY{n}{k}\PY{o}{\PYZlt{}}\PY{n}{numberOfCustomers}\PY{p}{:}
+                  \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{timeBetween}\PY{p}{)} \PY{p}{)}
+                  \PY{n}{k} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{reneging\PYZus{}customer\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Customer\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{k}, patience = 1.3, queue = queue) )
+                  \PY{k}{while} \PY{n}{newArrivalEvents} \PY{o}{!=} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{ev} \PY{o}{=} \PY{n}{newArrivalEvents}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} The newArrivalEvents list contains events that servers are waiting for in order to proceed.}
+                      \PY{c+c1}{\PYZsh{} What they are waiting for is for a new customer to arrive, so trigger the event}
+                      \PY{n}{ev}\PY{o}{.}\PY{n}{succeed}\PY{p}{(}\PY{p}{)}
+                      \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Triggering arrival event}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{env} \PY{o}{=} \PY{n}{simpy}\PY{o}{.}\PY{n}{Environment}\PY{p}{(}\PY{p}{)}
+          \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{waitingForArrivalEvents} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{customer\PYZus{}generator\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{waitingForArrivalEvents}\PY{p}{)} \PY{p}{)}
+          \PY{n}{env}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Customer-1 with patience 1.300000 enters the queue at time 1.468228
+Customer-2 with patience 1.300000 enters the queue at time 2.243378
+Customer-1 got impatient and exited the queue at time 2.768228
+Customer-3 with patience 1.300000 enters the queue at time 3.056802
+Customer-2 got impatient and exited the queue at time 3.543378
+Customer-3 got impatient and exited the queue at time 4.356802
+Customer-4 with patience 1.300000 enters the queue at time 5.027282
+Customer-4 got impatient and exited the queue at time 6.327282
+Customer-5 with patience 1.300000 enters the queue at time 7.311952
+Customer-6 with patience 1.300000 enters the queue at time 7.859252
+Customer-7 with patience 1.300000 enters the queue at time 8.178111
+Customer-8 with patience 1.300000 enters the queue at time 8.350823
+Customer-5 got impatient and exited the queue at time 8.611952
+Customer-6 got impatient and exited the queue at time 9.159252
+Customer-7 got impatient and exited the queue at time 9.478111
+Customer-8 got impatient and exited the queue at time 9.650823
+    \end{Verbatim}
+
+    \paragraph{Service process}\label{service-process}
+
+There is a service process that takes care of the customers in the
+queue. The time to serve a single customer is exponentially distributed
+with mean 1.3 time units. The service process takes out customers from
+the queueu on a first come first served basis (FIFO queue). If there are
+no customers, the server process will wait for the event that a new
+customer is arriving.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{k}{def} \PY{n+nf}{service\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{serviceTime}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{arrivalEvents}\PY{p}{)}\PY{p}{:}
+              \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                  \PY{k}{while} \PY{n}{queue} \PY{o}{!=} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{customer} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Take out the first customer}
+                      \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{serviceTime}\PY{p}{)} \PY{p}{)}
+                      \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ served at time }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{customer}\PY{p}{,} \PY{n}{env}\PY{o}{.}\PY{n}{now}\PY{p}{)} \PY{p}{)}
+                  \PY{n}{newArrivalEv} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{event}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{arrivalEvents}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{newArrivalEv}\PY{p}{)} 
+                  \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Service process waiting for a new arrival}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+                  \PY{k}{yield} \PY{n}{newArrivalEv} \PY{c+c1}{\PYZsh{} Wait for the arrival event to be triggered. This is done in customer\PYZus{}generator\PYZus{}proc}
+          
+          \PY{n}{env} \PY{o}{=} \PY{n}{simpy}\PY{o}{.}\PY{n}{Environment}\PY{p}{(}\PY{p}{)}
+          \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{waitingForArrivalEvents} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{service\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mf}{1.3}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{waitingForArrivalEvents}\PY{p}{)} \PY{p}{)}
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{customer\PYZus{}generator\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{waitingForArrivalEvents}\PY{p}{)} \PY{p}{)}
+          
+          \PY{n}{env}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Service process waiting for a new arrival
+Triggering arrival event
+Customer-1 with patience 1.300000 enters the queue at time 2.193581
+Customer-1 served at time 2.324042
+Service process waiting for a new arrival
+Triggering arrival event
+Customer-2 with patience 1.300000 enters the queue at time 3.629634
+Customer-3 with patience 1.300000 enters the queue at time 3.957301
+Customer-2 served at time 4.996579
+Customer-4 with patience 1.300000 enters the queue at time 5.474184
+Customer-4 got impatient and exited the queue at time 6.774184
+Customer-3 served at time 7.580712
+Service process waiting for a new arrival
+    \end{Verbatim}
+
+    \subsubsection{Exercise: What is the probability that a customer will
+leave the system without getting
+served?}\label{exercise-what-is-the-probability-that-a-customer-will-leave-the-system-without-getting-served}
+
+The code for the simulation model above with reneging customers is
+repeated here below, but without the print statements. Think about how
+you can record the number of customers that leave without being served
+in the simulation. Use this to answer the question.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{k}{def} \PY{n+nf}{reneging\PYZus{}customer\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{n}{patience}\PY{p}{,} \PY{n}{queue}\PY{p}{)}\PY{p}{:}
+              \PY{n}{queue}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{name}\PY{p}{)} \PY{c+c1}{\PYZsh{} Customers are identified by name, so all names should be unique}
+              \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(}\PY{l+m+mf}{1.3}\PY{p}{)}
+              \PY{k}{if} \PY{n}{name} \PY{o+ow}{in} \PY{n}{queue}\PY{p}{:}
+                  \PY{n}{queue}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{customer\PYZus{}generator\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{numberOfCustomers}\PY{p}{,} \PY{n}{timeBetween}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{newArrivalEvents}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Will generate a fixed number of customers, with random time between arrivals.\PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{while} \PY{n}{k}\PY{o}{\PYZlt{}}\PY{n}{numberOfCustomers}\PY{p}{:}
+                  \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{timeBetween}\PY{p}{)} \PY{p}{)}
+                  \PY{n}{k} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{reneging\PYZus{}customer\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Customer\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{k}, patience = 1.3, queue = queue) )
+                  \PY{k}{while} \PY{n}{newArrivalEvents} \PY{o}{!=} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{ev} \PY{o}{=} \PY{n}{newArrivalEvents}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} The newArrivalEvents list contains events that servers are waiting for in order to proceed.}
+                      \PY{c+c1}{\PYZsh{} What they are waiting for is for a new customer to arrive, so trigger the event}
+                      \PY{n}{ev}\PY{o}{.}\PY{n}{succeed}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{service\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{serviceTime}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{arrivalEvents}\PY{p}{)}\PY{p}{:}
+              \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                  \PY{k}{while} \PY{n}{queue} \PY{o}{!=} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{customer} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Take out the first customer}
+                      \PY{k}{yield} \PY{n}{env}\PY{o}{.}\PY{n}{timeout}\PY{p}{(} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{serviceTime}\PY{p}{)} \PY{p}{)}
+                  \PY{n}{newArrivalEv} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{event}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{arrivalEvents}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{newArrivalEv}\PY{p}{)} 
+                  \PY{k}{yield} \PY{n}{newArrivalEv} \PY{c+c1}{\PYZsh{} Wait for the arrival event to be triggered. This is done in customer\PYZus{}generator\PYZus{}proc}
+          
+          \PY{n}{env} \PY{o}{=} \PY{n}{simpy}\PY{o}{.}\PY{n}{Environment}\PY{p}{(}\PY{p}{)}
+          \PY{n}{queue} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{waitingForArrivalEvents} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{service\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mf}{1.3}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{waitingForArrivalEvents}\PY{p}{)} \PY{p}{)}
+          \PY{n}{env}\PY{o}{.}\PY{n}{process}\PY{p}{(} \PY{n}{customer\PYZus{}generator\PYZus{}proc}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{queue}\PY{p}{,} \PY{n}{waitingForArrivalEvents}\PY{p}{)} \PY{p}{)}
+          
+          \PY{n}{env}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
