@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+\usetikzlibrary{shapes}
+%\usepackage{setspace}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.13}
+
+
+\begin{document}
+% Define block styles
+\tikzstyle{terminal} = [ellipse, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=3pt]
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+
+  \node[terminal] (start) {Start};
+  \node[block, below of=start] (wait) {Wait random time (hold)};
+  \node[block, below of=wait, node distance=2.5cm] (startProcess) {Create and start new customer process};
+  
+  \node[coordinate, left of=start, node distance=3cm] (address) {};
+  \node[below of=address, node distance=1cm] (zero) {0};
+  \node[below of=zero, node distance=2.5cm] (one) {1};
+
+  \draw[->] (start) --  (wait);
+  \draw[->] (wait) -- (startProcess);
+  \draw[->] (startProcess) -- ++(0,-2) -- ++(3cm,0) |- (wait);
+  \draw[->, dashed] (startProcess) -- ++(-3cm,0);
+
+\end{tikzpicture}
+\end{document}
+
+

@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+\usetikzlibrary{shapes}
+%\usepackage{setspace}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.13}
+
+
+\begin{document}
+% Define block styles
+\tikzstyle{terminal} = [ellipse, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=3pt]
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+
+  \node[terminal] (start) {Start};
+  \node[block, below of=start] (enter) {Enter store. Check time in};
+  \node[block, below of=enter, node distance=2.5cm] (shop) {Shop. Wait random time};
+  \node[block, below of=shop, node distance=2.5cm] (enterQ) {Enter queue};
+  \node[decision, below of=enterQ] (isIdle) {Cashier idle?};
+  \node[block, right of=isIdle, node distance=4cm] (activate) {Activate cashier};
+  \node[block, below of=isIdle, node distance=3cm] (passivate) {Passivate};
+  \node[block, below of=passivate, node distance=2.5cm] (leave) {Leave shop. Check time spent};
+  \node[terminal, below of=leave, node distance=2cm] (stop) {Stop};
+  
+  \node[coordinate, left of=start, node distance=3cm] (address) {};
+  \node[below of=address, node distance=1cm] (zero) {0};
+  \node[below of=zero, node distance=4.5cm] (one) {1};
+  \node[below of=one, node distance=8.5cm] (two) {2};
+
+  \draw[->] (start) --  (enter);
+  \draw[->] (enter) --  (shop);
+  \draw[->] (shop) --  (enterQ);
+  \draw[->] (enterQ) --  (isIdle);
+  \draw[->] (isIdle) -- node {Yes} (activate);
+  \draw[->] (isIdle) -- node {No} (passivate);
+  \draw[->] (passivate) -- (leave);
+  \draw[->] (leave) -- (stop);
+  \draw[->] (activate) |- (passivate);
+
+  \draw[dashed, ->] (passivate) ++(-4cm, 0) -- node {is activated} (passivate);
+  \draw[dashed, ->] (activate) -- ++(2.5cm, 0);
+\end{tikzpicture}
+\end{document}
+
+

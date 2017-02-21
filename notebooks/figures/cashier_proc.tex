@@ -1,0 +1,50 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+\usetikzlibrary{shapes}
+%\usepackage{setspace}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.13}
+
+
+\begin{document}
+% Define block styles
+\tikzstyle{terminal} = [ellipse, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=3pt]
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+
+  \node[terminal] (start) {Start};
+  \node[decision, below of=start, node distance=2cm] (queueEmpty) {Queue empty?};
+  \node[block, left of=queueEmpty, node distance=3cm] (passivate) {Passivate};
+  \node[block, below of=queueEmpty, node distance=3cm] (takeOut) {Remove first customer from queue};
+  \node[block, below of=takeOut] (serve) {Serve customer (hold)};
+  \node[block, below of=serve] (activate) {Activate customer};
+  
+  \node[coordinate, left of=start, node distance=6cm] (address) {};
+  \node[below of=address, node distance=1cm] (zero) {0};
+  \node[below of=zero, node distance=3cm] (one) {1};
+  \node[below of=one, node distance=4cm] (two) {2};
+
+  \draw[->] (start) --  (queueEmpty);
+  \draw[->] (queueEmpty) -- node {Yes} (passivate);
+  \draw[->] (queueEmpty) -- node {No} (takeOut);
+  \draw[->] (takeOut) -- (serve);
+  \draw[->] (serve) -- (activate);
+  \draw[->] (activate) -- ++(0,-1) -- ++(3cm,0) |- (queueEmpty);
+  \draw[->] (passivate) |- (takeOut);
+
+  \draw[dashed, ->] (passivate) ++(-4cm, 0) -- node {is activated} (passivate);
+  \draw[dashed, ->] (activate) -- ++(-4cm, 0);
+\end{tikzpicture}
+\end{document}
+
+
