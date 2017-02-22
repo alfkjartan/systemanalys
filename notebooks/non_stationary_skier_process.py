@@ -17,11 +17,12 @@ def skier_generator_process(env, arrivals):
 env = simpy.Environment() # Create the simulation environment
 lmbda = 0.5 # One arrival per two minutes on average
 arr = [] # The list of arrival times
-env.process( skier_generator_process(env, lmbda, arr) ) # Tell the simulator to process the skier generator process
+env.process( skier_generator_process(env, arr) ) # Tell the simulator to process the skier generator process
 env.run(until=60*8) # Simulate a day
 
-interArrivalTimesAM = np.diff(np.array(arr[:int(len(arr)/2)])) # The interarrival times first half of the day
-interArrivalTimesPM = np.diff(np.array(arr[int(len(arr)/2):])) # The interarrival times second half of the day
+
+interArrivalTimesAM = np.diff( np.array( [t for t in arr if t<(12-8)*60] ) ) # The interarrival times first half of the day
+interArrivalTimesPM = np.diff( np.array( [t for t in arr if t>(12-8)*60] ) ) # The interarrival times second half of the day
 
 plt.figure(figsize=(16,6))
 plt.subplot(121)
